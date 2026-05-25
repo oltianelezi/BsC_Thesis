@@ -1,0 +1,4 @@
+Model,Precision,Recall,mAP@0.5,mAP@0.5:0.95,Train time (min),Parameters (M),Weight file (MB)
+yolov8n,0.6273,0.5225,0.5015,0.1994,12.8,3.01,6.2
+yolov8s,0.7399,0.6224,0.5985,0.2181,43.6,11.14,22.5
+yolov8m,0.656,0.5735,0.5532,0.2272,57.4,25.86,52.0

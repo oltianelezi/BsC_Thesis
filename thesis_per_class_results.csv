@@ -1,0 +1,7 @@
+Model,Class,Precision,Recall,mAP@0.5,mAP@0.5:0.95
+yolov8n,ball,0.2222,0.0625,0.0793,0.0111
+yolov8n,player,0.8566,0.9083,0.923,0.3684
+yolov8s,ball,0.3257,0.0938,0.0909,0.0182
+yolov8s,player,0.8988,0.9336,0.9441,0.3686
+yolov8m,ball,0.307,0.125,0.0591,0.0101
+yolov8m,player,0.8998,0.9385,0.9446,0.3946

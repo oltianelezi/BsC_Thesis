@@ -1,0 +1,4 @@
+Model,Parameters (M),Weight file (MB)
+yolov8n,3.01,6.2
+yolov8s,11.14,22.5
+yolov8m,25.86,52.0

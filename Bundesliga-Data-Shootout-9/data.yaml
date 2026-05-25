@@ -1,0 +1,13 @@
+names:
+- ball
+- player
+nc: 2
+roboflow:
+  license: CC BY 4.0
+  project: bundesliga-data-shootout-a411n
+  url: https://universe.roboflow.com/delfos/bundesliga-data-shootout-a411n/dataset/9
+  version: 9
+  workspace: delfos
+test: ../test/images
+train: ../train/images
+val: ../valid/images
