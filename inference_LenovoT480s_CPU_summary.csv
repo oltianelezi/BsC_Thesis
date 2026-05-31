@@ -1,0 +1,4 @@
+Model,Frames processed,Total detections,Dets/frame (mean),Frames w/ 0 dets,Mean confidence,Median confidence,Std confidence,Total time (s),Inference FPS,Dets [ball],Dets [player]
+yolov8n,750,15518,20.69,0,0.5031,0.5201,0.1087,53.06,14.1,319,15199
+yolov8s,750,17110,22.81,0,0.5633,0.5908,0.1191,114.02,6.6,717,16393
+yolov8m,750,16687,22.25,0,0.5776,0.6087,0.1112,254.3,2.9,529,16158
