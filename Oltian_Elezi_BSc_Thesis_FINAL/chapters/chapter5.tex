@@ -1,0 +1,50 @@
+\chapter{CONCLUSION AND FUTURE WORK}
+\label{ch:conclusion}
+
+% This is Chapter 5 - Conclusion and Future Work
+% Conclude your thesis and suggest future research directions
+
+\section{Conclusion}
+
+The goal of this thesis was to evaluate the accuracy-speed balance of the three lightest variants of the YOLOv8 architecture (nano, small and medium). The task on which they were compared consisted of football player and ball detection from broadcast video footage, and specifically how these models perform on consumer level hardware. Each model was trained identically on the Bundesliga Data Shootout dataset. Through running an equal inference test on all three machines, we get a clear and coherent picture of how model size and hardware capacity interact. 
+From the training validation results we see a clear accuracy hierarchy. YOLOv8m achieved the highest overall mAP@0.5 at 0.617, followed closely by YOLOv8s at 0.613, while YOLOv8n trailed noticeably at 0.534. Player detection was very effective on all models with each one of them exceeding AP scores of 0.90 on that class. However, as seen in relevant literature covered in Chapter 2, ball detection proved significantly more difficult, with no model surpassing an AP of 0.27. 
+
+The inference benchmarks demonstrate that hardware selection has a quintessential impact on throughput while being irrelevant to the accuracy, as confidence distributions and detection counts were consistent across all three devices. On Devices A (RTX 3060, CUDA) and B (Apple M4, MPS), all models tested passed the 25 FPS threshold for smooth real-time video processing, while Device C failed to reach it with even the lightest nano model. Below we give our recommendations for each specific hardware configuration:
+
+\begin{itemize}
+    \item Device A performed especially well, with even the YOLOv8m model performing comfortably above the threshold at 55.1 FPS. In this case, we would even suggest going to the even bigger YOLOv8l(large) model. 
+    \item Device B also performed well, but the medium model was only slightly above the threshold at 34.6 FPS. As such, it is the largest model we would suggest.
+    \item Device C made up the most resource-constrained environment in this evaluation, and the results show it.  None of the models managed to pass the real-time threshold of 25 FPS, making such a task unfeasible in this hardware configuration. However, tasks that do not need smooth real-time video processing are still possible, as the nano model performed at 14.1 FPS, which is respectable for the environment. 
+\end{itemize}
+
+\section{Limitations}
+Several limitations of this study should be acknowledged:
+\begin{itemize}
+    \item Dataset size: the Bundesliga Data Shootout dataset is relatively small, which contributed to high variance in ball detection metrics and limited the medium model's ability to generalise to the underrepresented ball class.
+    \item Input resolution: the standard 640×640 pipeline resolution proved insufficient for reliable ball detection, as the ball occupies very few pixels at this scale and becomes difficult to distinguish from the background.
+    \item Augmentation imperfections: the offline augmentation applied by Roboflow included vertical flipping and 90° rotations, which produce orientations that never occur in real broadcast footage and may have introduced noise into the training distribution.
+    \item Hardware coverage: the three tested devices, while representative of different budget tiers, do not cover the full range of consumer hardware. Mid-range discrete GPUs, integrated graphics, and ARM-based Windows devices remain outside the scope of this benchmark.
+\end{itemize}
+
+
+\section{Limitations}
+
+Despite the advancements described in this work, some limitations remain:
+\begin{itemize}
+    \item \textbf{Texture Dependency}: Like all defocus-based methods, "VoluFusion" struggles with untextured or perfectly reflective surfaces where focus cues are absent.
+    \item \textbf{Optical Calibration}: The accuracy of the volumetric projection is highly sensitive to the precision of the intrinsic and extrinsic camera parameters.
+    \item \textbf{Ambient Lighting}: Performance may degrade in extremadamente dynamic lighting conditions where local focus measures become inconsistent.
+\end{itemize}
+
+\section{Future Work}
+
+The most immediate improvements are in the two major limitations identified above. Increasing the input resolution to 1280×1280 would increase the spatial footprint of the ball in each frame, and is expected to improve ball detection AP meaningfully without changing the model architecture. Expanding the training dataset (e.g. by using additional Bundesliga Data Shootout splits or other complementary publicly available football datasets) would reduce the variance in ball detection metrics and allow larger models to generalise better. It would also be more representative of deployment conditions to replace or supplement the offline Roboflow augmentation with augmentations more suitable for broadcast footage (removing vertical flips and 90° rotations, adding motion blur and realistic compression artefacts).
+
+\section{Final Remarks}
+
+Football is still the world game, played and watched by all, irrespective of economic background. The statistical revolution that is transforming professional football at the highest levels offers the potential to benefit every level of the game — but only if the tools that underlie it are made available. This thesis has shown that meaningful object detection from broadcast football footage is possible on consumer hardware using the lightweight versions of the YOLOv8 architecture without expensive infrastructure or specialised engineering expertise.
+
+The results show that a practitioner with a mid-range laptop with a discrete GPU or a modern Apple Silicon SOC can run a real-time detection pipeline with YOLOv8s with good player detection and reasonable ball detection at well above the minimum frame rate for smooth video. A CPU-only machine is not ideal for live analysis but can still be a useful tool for offline post-match processing with the nano model. These are affordable options for small clubs, youth academies and individual coaches that lack the equivalent professional tracking infrastructure and wearable sensor systems available at the elite level.
+
+The gap between what is possible at the top of the sport and what is available to the rest of it is not inevitable. Computer vision pipelines built on openly available models and publicly versioned datasets represent a concrete step toward closing it. This thesis is a contribution to that effort.
+
